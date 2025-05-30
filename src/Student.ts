@@ -2,7 +2,7 @@ import type { GoogleClassroom } from "./GoogleClassroom";
 import type { TimeTable } from "./TimeTable";
 import { User } from "./User";
 
-class Student extends User{
+export class Student extends User{
     constructor (
         userId : number, firstName : string, 
         lastName : string, email : string, 
