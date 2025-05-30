@@ -1,1 +1,13 @@
 import { SchoolManagementSystem } from "./src/SchoolManagementSystem";
+import { Exam } from "./src/Exam";
+import { Grade } from "./src/Grade";
+import { Subject } from "./src/Subject";
+import { Teacher } from "./src/Teacher";
+import { Room } from "./src/Room";
+import { Classroom } from "./src/Classroom";
+import { GoogleClassroom } from "./src/GoogleClassroom";
+import { Assignment } from "./src/Assignment";
+import { StudyMaterial } from "./src/StudyMaterial";
+import { Feedback } from "./src/Feedback";
+import { Department } from "./src/Department";
+import { TimeTable } from "./src/TimeTable";
