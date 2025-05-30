@@ -1,7 +1,14 @@
 export abstract class User {
-    constructor (private userId : number, private firstName : string, private lastName : string, private email : string, private password : string, private phone : string) {}
+    constructor (
+        private userId : number,
+        private firstName : string,
+        private lastName : string,
+        private email : string,
+        private password : string,
+        private phone : string
+    ) {}
 
-    public register (firstName: string, lastName: string, email: string, password: string, phone: string): void {
+    public register(firstName: string, lastName: string, email: string, password: string, phone: string): void {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -9,7 +16,7 @@ export abstract class User {
         this.phone = phone;
     }
 
-    public login (email: string, password: string): boolean {
+    public login(email: string, password: string): boolean {
         if (this.email === email && this.password === password) {
             console.log("Login successful");
             return true;
@@ -19,8 +26,8 @@ export abstract class User {
         }
     }
 
-    public logout (): void {
-        
+    public logout(): void {
+        console.log("User logged out");
     }
 
     public getFullName(): string {
