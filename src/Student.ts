@@ -1,5 +1,5 @@
 import { User } from "./User";
 
-class Student extends User{
+export class Student extends User{
 
 }
