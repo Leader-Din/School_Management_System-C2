@@ -22,5 +22,9 @@ export abstract class User {
     public logout (): void {
         
     }
+
+    public getFullName(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
     
 }
