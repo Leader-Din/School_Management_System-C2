@@ -20,6 +20,7 @@ export class Classroom {
     }
 
     public downloadStudyMaterial(studyMaterial:StudyMaterial):StudyMaterial{
+        return studyMaterial;
 
     }
 
@@ -32,6 +33,7 @@ export class Classroom {
     }
 
     public returnGrade(grade:Grade):Grade {
+        return grade;
 
     }
 }
