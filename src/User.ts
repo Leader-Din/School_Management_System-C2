@@ -29,4 +29,9 @@ export abstract class User {
     public logout(): void {
         console.log("User logged out");
     }
+
+    public getFullName(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
+    
 }
