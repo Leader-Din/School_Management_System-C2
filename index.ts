@@ -36,7 +36,7 @@ const assignments = [new Assignment(1, "HW1", "Solve problems 1-5", new Date("20
 const googleClassroom = new GoogleClassroom();
 // If Student expects string[] for assignments, extract assignment names or IDs:
 const assignmentNames = assignments.map(a => a.title); // or a.id if IDs are expected
-const student = new Student(2, "Bob", "Smith", "bob@school.com", "pass123", "0123456789", assignmentNames, timetable, googleClassroom);
+const student = new Student(2, "Pheakdy", "Din", "pheakdy@school.com", "pass123", "0123456789", assignmentNames, timetable, googleClassroom);
 
 // show it on console
 console.log(student.viewTimetable());
@@ -44,5 +44,5 @@ console.log(student.viewStudyMaterial());
 console.log(student.getFullName());
 console.log(student.viewExamSchedules());
 console.log(student.viewAssignment());
-student.login("bob@school.com", "pass123");
+student.login("remen@school.com", "pass123");
 student.register("Leader", "Din", "leader@gmail.com", "leader123", "1234567890");
