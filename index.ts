@@ -36,6 +36,10 @@ import { Student } from "./src/Student";
 
 
 
+
+
+
+// __________________________________________________________SchoolManagementSystem_________________________________________________________
 // School
 const school = new SchoolManagementSystem("My School", "123 St", "123456789");
 console.log(school.viewSchoolDetails());
