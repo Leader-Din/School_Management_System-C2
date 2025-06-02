@@ -34,3 +34,35 @@ import { Student } from "./src/Student";
 
 // _________________________________________________________________Classroom_____________________________________________________________________
 
+
+
+// School
+const school = new SchoolManagementSystem("My School", "123 St", "123456789");
+console.log(school.viewSchoolDetails());
+
+// Department
+const csDept = new Department("Computer Science");
+
+// Teacher
+const teacher = new Teacher(1, "Alice", "Doe", "alice@school.com", "pass123", "0987654321", csDept);
+
+// Subject
+const subject = new Subject(1, "CS101", [teacher]);
+
+// Exam + Timetable
+const room = { name: "Room 101", className: "CS101", classLocation: "First Floor" }; // Room object with all required properties
+const exam = new Exam([subject], "CS101", new Date(), room);
+const timetable = new TimeTable(new Date(), "Room 101", "CS101", [exam]);
+
+// Student
+const assignments = [new Assignment(1, "HW1", "Solve problems 1-5", new Date("2024-06-30"), "CS101")];
+const googleClassroom = new GoogleClassroom();
+// If Student expects string[] for assignments, extract assignment names or IDs:
+const assignmentNames = assignments.map(a => a.title); // or a.id if IDs are expected
+const student = new Student(2, "Bob", "Smith", "bob@school.com", "pass123", "0123456789", assignmentNames, timetable, googleClassroom);
+
+// show it on console
+console.log(student.viewTimetable());
+console.log(student.viewStudyMaterial());
+student.login("bob@school.com", "pass123");
+student.logout();
