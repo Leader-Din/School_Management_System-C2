@@ -7,4 +7,3 @@ export class Room {
     this.classLocation = classLocation;
   }
 }
-
