@@ -13,8 +13,6 @@ import { Department } from "./src/Department";
 import { TimeTable } from "./src/TimeTable";
 import { Student } from "./src/Student";
 
-
-
 // School
 const school = new SchoolManagementSystem("My School", "123 St", "123456789");
 console.log(school.viewSchoolDetails());
@@ -41,7 +39,7 @@ const assignments = [new Assignment(1, "HW1", "Solve problems 1-5", new Date("20
 const googleClassroom = new GoogleClassroom();
 // If Student expects string[] for assignments, extract assignment names or IDs:
 const assignmentNames = assignments.map(a => a.title); // or a.id if IDs are expected
-const student = new Student(1, "Bob", "Smith", "bob@school.com", "pass123", "0123456789", assignmentNames, timetable, googleClassroom);
+const student = new Student(2, "Pheakdy", "Din", "pheakdy@school.com", "pass123", "0123456789", assignmentNames, timetable, googleClassroom);
 
 // Classroom
 const classroom = new Classroom("CS101");
@@ -93,8 +91,8 @@ console.log("Teacher's Grades:", teacher.getGrades().map(
 // show it on console
 console.log(student.viewTimetable());
 console.log(student.viewStudyMaterial());
-student.login("bob@school.com", "pass123");
-student.logout();
+console.log(student.getFullName());
 console.log(student.viewExamSchedules());
 console.log(student.viewAssignment());
-console.log(student.viewAssignmentGrade());
+student.login("remen@school.com", "pass123");
+student.register("Leader", "Din", "leader@gmail.com", "leader123", "1234567890");
