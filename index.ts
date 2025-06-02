@@ -13,8 +13,6 @@ import { Department } from "./src/Department";
 import { TimeTable } from "./src/TimeTable";
 import { Student } from "./src/Student";
 
-
-
 // School
 const school = new SchoolManagementSystem("My School", "123 St", "123456789");
 console.log(school.viewSchoolDetails());
@@ -43,5 +41,8 @@ const student = new Student(2, "Bob", "Smith", "bob@school.com", "pass123", "012
 // show it on console
 console.log(student.viewTimetable());
 console.log(student.viewStudyMaterial());
+console.log(student.getFullName());
+console.log(student.viewExamSchedules());
+console.log(student.viewAssignment());
 student.login("bob@school.com", "pass123");
-student.logout();
+student.register("Leader", "Din", "leader@gmail.com", "leader123", "1234567890");
