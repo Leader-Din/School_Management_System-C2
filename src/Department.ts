@@ -5,7 +5,7 @@ export class Department {
     constructor(private name: string) {
         this.name = name;
     }
-    addTeacher(teacher: Teacher): void {
+    addTeacher(p0: string, teacher: Teacher): void {
         this.teachers.push(teacher);
     }
 }

@@ -6,6 +6,9 @@ import { Classroom } from "./Classroom";
 import { StudyMaterial } from "./StudyMaterial";
 
 export class Student extends User{
+	alertMessageBeforeClass5Minute(): any {
+		throw new Error("Method not implemented.");
+	}
     constructor (
         userId : number, firstName : string, 
         lastName : string, email : string, 
