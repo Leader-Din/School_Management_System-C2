@@ -1,11 +1,20 @@
-import type { Teacher } from "./Teacher";
-export class Department {
-        teachers: Teacher[] = [];
+// Department.ts
+import { Teacher } from "./Teacher";
 
-    constructor(private name: string) {
-        this.name = name;
-    }
-    addTeacher(teacher: Teacher): void {
-        this.teachers.push(teacher);
-    }
+export class Department {
+  private teachers: Teacher[] = [];
+
+  constructor(private name: string) {}
+
+  addTeacher(teacher: Teacher): void {
+    this.teachers.push(teacher);
+  }
+
+  getTeachers(): Teacher[] {
+    return [...this.teachers];
+  }
+
+  getName(): string {
+    return this.name;
+  }
 }

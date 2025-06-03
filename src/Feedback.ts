@@ -1,29 +1,18 @@
-export class Feedback{
-    subjectID: number;
-    comment: string;
-    rating: string;
+// Feedback.ts
+export class Feedback {
+  constructor(
+    public subjectID: number,
+    public comment: string = "",
+    public rating: string = ""
+  ) {}
 
-    constructor(subjectID: number) {
-        this.subjectID = subjectID;
-        this.comment = "";
-        this.rating = "";
-    }
-    addCommentToSubject(subjectID: number, comment: string): void {
-    if (this.subjectID === subjectID) {
-      this.comment = comment;
-      console.log(`Comment added to subject ${subjectID}: "${comment}"`);
-    } else {
-      console.log(`Subject ID ${subjectID} does not match this feedback entry.`);
-    }
+  addComment(comment: string): void {
+    this.comment = comment;
+    console.log(`Comment added to subject ${this.subjectID}: "${comment}"`);
   }
 
-  addRatingToSubject(subjectID: number, rating: string): void {
-    if (this.subjectID === subjectID) {
-      this.rating = rating;
-      console.log(`Rating "${rating}" added to subject ${subjectID}`);
-    } else {
-      console.log(`Subject ID ${subjectID} does not match this feedback entry.`);
-    }
+  addRating(rating: string): void {
+    this.rating = rating;
+    console.log(`Rating "${rating}" added to subject ${this.subjectID}`);
   }
 }
-

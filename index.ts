@@ -12,7 +12,7 @@ import { Feedback } from "./src/Feedback";
 import { Department } from "./src/Department";
 import { TimeTable } from "./src/TimeTable";
 import { Student } from "./src/Student";
-
+import { Admin } from "./src/Admin";
 // School
 const school = new SchoolManagementSystem("My School", "123 St", "123456789");
 console.log(school.viewSchoolDetails());
@@ -22,27 +22,62 @@ const csDept = new Department("Computer Science");
 
 // Teacher
 const teacher = new Teacher(1, "Alice", "Doe", "alice@school.com", "pass123", "0987654321", csDept);
+csDept.addTeacher(teacher);
 
 // Subject
 const subject = new Subject(1, "CS101", [teacher]);
 
+// Admin
+const admin = new Admin(3, "John", "Smith", "john@school.com", "admin123", "1112223333");
+admin.addSubject(subject);
+admin.addTeacher(teacher);
+
 // Exam + Timetable
-const room = { name: "Room 101", className: "CS101", classLocation: "First Floor" }; // Room object with all required properties
-const exam = new Exam([subject], "CS101", new Date(), room);
-const timetable = new TimeTable(new Date(), "Room 101", "CS101", [exam]);
+const room = new Room("CS101", "First Floor");
+const exam = new Exam([subject], "CS101 Midterm", new Date("2025-06-10"), room);
+const timetable = new TimeTable(new Date("2025-06-10"), "Room 101", "CS101", [exam]);
+
+// GoogleClassroom and Classroom
+const googleClassroom = new GoogleClassroom();
+const classroom = googleClassroom.createClassroom("CS101 Classroom");
+classroom.addTeacher(teacher);
 
 // Student
-const assignments = [new Assignment(1, "HW1", "Solve problems 1-5", new Date("2024-06-30"), "CS101")];
-const googleClassroom = new GoogleClassroom();
-// If Student expects string[] for assignments, extract assignment names or IDs:
-const assignmentNames = assignments.map(a => a.title); // or a.id if IDs are expected
-const student = new Student(2, "Pheakdy", "Din", "pheakdy@school.com", "pass123", "0123456789", assignmentNames, timetable, googleClassroom);
+const assignment = new Assignment(1, "HW1", "Solve problems 1-5", new Date("2025-06-30"), "CS101");
+const student = new Student(
+  2,
+  "Pheakdy",
+  "Din",
+  "pheakdy@school.com",
+  "pass123",
+  "0123456789",
+  timetable,
+  googleClassroom
+);
 
-// show it on console
+// Add assignment and study material
+teacher.uploadAssignment(classroom, assignment);
+const studyMaterial = new StudyMaterial("CS101 Notes", ["Chapter 1: Intro", "Chapter 2: Variables"]);
+teacher.uploadStudyMaterial(classroom, studyMaterial);
+
+// Student interactions
 console.log(student.viewTimetable());
-console.log(student.viewStudyMaterial());
-console.log(student.getFullName());
 console.log(student.viewExamSchedules());
-console.log(student.viewAssignment());
-student.login("remen@school.com", "pass123");
-student.register("Leader", "Din", "leader@gmail.com", "leader123", "1234567890");
+console.log(student.viewAssignments(classroom));
+console.log(student.viewStudyMaterials(classroom));
+student.submitAssignment(assignment, classroom);
+student.downloadMaterial(studyMaterial, classroom);
+
+// Grade
+const grade = new Grade(assignment.id, student.getUserId(), 85, "Good work!");
+teacher.returnGrade(classroom, grade);
+console.log(student.viewAssignmentGrades(classroom));
+
+// Feedback
+const feedback = new Feedback(subject.getSubjectID());
+feedback.addComment("Great course!");
+feedback.addRating("5/5");
+
+// Login and Register
+student.login("pheakdy@school.com", "pass123");
+student.register("Leader", "Din", "leader@school.com", "leader123", "1234567890");

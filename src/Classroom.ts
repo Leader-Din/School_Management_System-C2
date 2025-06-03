@@ -1,3 +1,4 @@
+// Classroom.ts
 import { Assignment } from "./Assignment";
 import { Grade } from "./Grade";
 import { Student } from "./Student";
@@ -5,55 +6,65 @@ import { StudyMaterial } from "./StudyMaterial";
 import { Teacher } from "./Teacher";
 
 export class Classroom {
-    private studyMaterials: StudyMaterial[] = [];
-    private assignments: Assignment[] = [];
-    private grades: Grade[] = [];
-    private teachers: Teacher[] = [];
-    private students: Student[] = [];
+  private studyMaterials: StudyMaterial[] = [];
+  private assignments: Assignment[] = [];
+  private grades: Grade[] = [];
+  private teachers: Teacher[] = [];
+  private students: Student[] = [];
 
-    constructor(private name: string) {}
+  constructor(private name: string) {}
 
-    public getName(): string {
-        return this.name;
+  public getName(): string {
+    return this.name;
+  }
+
+  public downloadStudyMaterial(studyMaterial: StudyMaterial): StudyMaterial {
+    const found = this.studyMaterials.find((sm) => sm.title === studyMaterial.title);
+    if (found) {
+      console.log(`Downloading study material "${found.title}" from classroom "${this.name}".`);
+      return found;
+    } else {
+      throw new Error("Study material not found.");
     }
+  }
 
-    public downloadStudyMaterial(studyMaterial: StudyMaterial): StudyMaterial {
-        const found = this.studyMaterials.find(
-        (sm) => sm.title === studyMaterial.title
-        );
-        if (found) {
-        console.log(`Downloading study material "${found.title}" from classroom "${this.name}".`);
-        return found;
-        } else {
-        throw new Error("Study material not found.");
-        }
-    }
+  public addTeacher(teacher: Teacher): void {
+    this.teachers.push(teacher);
+  }
 
-    public addTeacher(teacher: Teacher): void {
-        this.teachers.push(teacher);
-    }
+  public addStudent(student: Student): void {
+    this.students.push(student);
+  }
 
-    public addStudent(student: Student): void {
-        this.students.push(student);
-    }
+  public addAssignment(assignment: Assignment): void {
+    this.assignments.push(assignment);
+  }
 
-    public getStudents(): Student[] {
-        return this.students;
-    }
+  public addGrade(grade: Grade): void {
+    this.grades.push(grade);
+  }
 
-    public getTeachers(): Teacher[] {
-        return this.teachers;
-    }
+  public addStudyMaterial(material: StudyMaterial): void {
+    this.studyMaterials.push(material);
+  }
 
-    public getAssignments(): Assignment[] {
-        return this.assignments;
-    }
+  public getStudents(): Student[] {
+    return [...this.students];
+  }
 
-    public getStudyMaterials(): StudyMaterial[] {
-        return this.studyMaterials;
-    }
+  public getTeachers(): Teacher[] {
+    return [...this.teachers];
+  }
 
-    public getGrades(): Grade[] {
-        return this.grades;
-    }
+  public getAssignments(): Assignment[] {
+    return [...this.assignments];
+  }
+
+  public getStudyMaterials(): StudyMaterial[] {
+    return [...this.studyMaterials];
+  }
+
+  public getGrades(): Grade[] {
+    return [...this.grades];
+  }
 }

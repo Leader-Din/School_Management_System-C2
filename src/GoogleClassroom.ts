@@ -1,18 +1,16 @@
+// GoogleClassroom.ts
 import { Classroom } from "./Classroom";
 
 export class GoogleClassroom {
-    private classrooms: Classroom[];
+  private classrooms: Classroom[] = [];
 
-    constructor() {
-        this.classrooms = [];
-    }
+  createClassroom(name: string): Classroom {
+    const newClassroom = new Classroom(name);
+    this.classrooms.push(newClassroom);
+    return newClassroom;
+  }
 
-    createClassroom(name: string): void {
-        const newClassroom = new Classroom(name);
-        this.classrooms.push(newClassroom);
-    }
-
-    getAllClassrooms(): Classroom[] {
-        return this.classrooms;
-    }
+  getAllClassrooms(): Classroom[] {
+    return [...this.classrooms];
+  }
 }

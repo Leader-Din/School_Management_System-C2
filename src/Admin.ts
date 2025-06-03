@@ -1,27 +1,38 @@
-import type { Subject } from "./Subject";
+// Admin.ts
 import { User } from "./User";
-import type { Teacher } from "./Teacher";
+import { Subject } from "./Subject";
+import { Teacher } from "./Teacher";
 
-export class Admin extends User{
-    subjects: Subject[] = [];
-    teachers: Teacher[] = [];
+export class Admin extends User {
+  private subjects: Subject[] = [];
+  private teachers: Teacher[] = [];
 
-    constructor(
-      userId: number,
-      firstName: string,
-      lastName: string,
-      email: string,
-      password: string,
-      phone: string
-    ) {
-      super(userId, firstName, lastName, email, password, phone);
-    }
+  constructor(
+    userId: number,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    phone: string
+  ) {
+    super(userId, firstName, lastName, email, password, phone);
+  }
 
-    assignSubjectToStudents(subject: Subject): void {
-      this.subjects.push(subject);
-    }
+  addSubject(subject: Subject): void {
+    this.subjects.push(subject);
+    console.log(`Subject ${subject.getCodeSubject()} added by ${this.getFullName()}.`);
+  }
 
-    assignTeacherToStudents(teacher: Teacher): void {
-      this.teachers.push(teacher);
-    }
+  addTeacher(teacher: Teacher): void {
+    this.teachers.push(teacher);
+    console.log(`Teacher ${teacher.getFullName()} added by ${this.getFullName()}.`);
+  }
+
+  getSubjects(): Subject[] {
+    return [...this.subjects];
+  }
+
+  getTeachers(): Teacher[] {
+    return [...this.teachers];
+  }
 }
