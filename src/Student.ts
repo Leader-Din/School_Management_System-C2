@@ -1,39 +1,51 @@
-import type { GoogleClassroom } from "./GoogleClassroom";
 import type { TimeTable } from "./TimeTable";
 import { User } from "./User";
 import { Assignment } from "./Assignment";
 import { Classroom } from "./Classroom";
 import { StudyMaterial } from "./StudyMaterial";
 
-export class Student extends User{
-    constructor (
-        userId : number, firstName : string, 
-        lastName : string, email : string, 
-        password : string, phone : string, 
-        private assignments: Assignment[],     
-        private timetable: TimeTable,
-        private classrooms: Classroom
+export class Student extends User {
+    private assignments: Assignment[] = [];
+    private timetable?: TimeTable;         
+    private classrooms: Classroom[] = [];   
+
+    constructor(
+        userId: number,
+        firstName: string,
+        lastName: string,
+        email: string,
+        password: string,
+        phone: string
     ) {
         super(userId, firstName, lastName, email, password, phone);
     }
 
-    public viewTimetable() : TimeTable {
+    // Optionally add setters for timetable and classrooms
+    public setTimetable(timetable: TimeTable): void {
+        this.timetable = timetable;
+    }
+
+    public setClassrooms(classrooms: Classroom[]): void {
+        this.classrooms = classrooms;
+    }
+
+    public viewTimetable(): TimeTable | undefined {
         return this.timetable;
     }
 
-    public viewExamSchedules() : TimeTable {
+    public viewExamSchedules(): TimeTable | undefined {
         return this.timetable;
     }
 
-    public viewStudyMaterial() : Classroom {
+    public viewStudyMaterial(): Classroom[] {
         return this.classrooms;
     }
 
-    public viewAssignment() : Classroom {
+    public viewAssignment(): Classroom[] {
         return this.classrooms;
     }
 
-    public viewAssignmentGrade() : Classroom {
+    public viewAssignmentGrade(): Classroom[] {
         return this.classrooms;
     }
 
