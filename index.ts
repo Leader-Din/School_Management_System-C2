@@ -26,6 +26,9 @@ csDept.addTeacher(teacher);
 
 // Subject
 const subject = new Subject(1, "CS101", [teacher]);
+// Grade
+const grade1 = new Grade(1, 1001, 92, "Excellent work!");
+grade1.showGrade();
 
 // Admin
 const admin = new Admin(3, "John", "Smith", "john@school.com", "admin123", "1112223333");
