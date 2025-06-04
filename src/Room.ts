@@ -1,9 +1,8 @@
 export class Room {
-    className: string;
+    classNames: string[] = [];
     classLocation: string;
 
-  constructor(className: string, classLocation: string) {
-    this.className = className;
+  constructor(classLocation: string) {
     this.classLocation = classLocation;
   }
 }

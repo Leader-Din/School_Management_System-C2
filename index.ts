@@ -46,6 +46,11 @@ const teacher = new Teacher(
   dept          
 );
 
+// Subject
+const subject = new Subject(1, "CS101", [teacher]);
+// Grade
+const grade1 = new Grade(1, 1001, 92, "Excellent work!");
+grade1.showGrade();
 // Add teacher to department
 dept.addTeacher(teacher);
 
