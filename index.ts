@@ -31,7 +31,7 @@ console.log(school.viewSchoolDetails());
 
 
 // *************************************************************___Department___************************************************************************************
-const dept = new Department("Computer Science");
+const dept = new Department(["Computer Science"]);
 console.log(dept);
 
 

@@ -25,10 +25,6 @@ export class Student extends User {
         this.timetable = timetable;
     }
 
-    public setClassrooms(classrooms: Classroom[]): void {
-        this.classrooms = classrooms;
-    }
-
     public viewTimetable(): TimeTable | undefined {
         return this.timetable;
     }
