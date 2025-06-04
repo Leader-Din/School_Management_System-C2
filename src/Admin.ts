@@ -3,6 +3,7 @@ import { User } from "./User";
 import type { Teacher } from "./Teacher";
 
 export class Admin extends User{
+  
     subjects: Subject[] = [];
     teachers: Teacher[] = [];
 
