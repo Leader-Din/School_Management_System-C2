@@ -1,6 +1,6 @@
 export abstract class User {
     constructor(
-        protected readonly userId: number,
+        public readonly userId: number,
         protected firstName: string,
         protected lastName: string,
         protected email: string,
@@ -61,4 +61,8 @@ export abstract class User {
             phone: this.phone
         };
     }
+
+    public getId(): number {
+        return this.userId;
+        }
 }

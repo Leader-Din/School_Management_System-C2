@@ -3,7 +3,7 @@ export class Grade {
   studentID: number;
   score: number;
   feedback: string;
-    grade: any;
+  grade: any;
 
   constructor(assignmentID: number, studentID: number, score: number, feedback: string) {
     this.assignmentID = assignmentID;
@@ -18,6 +18,7 @@ export class Grade {
     if (this.score >= 60) return 'D';
     return 'F';
   }
+  
   // Optional: method to display the grade details
   showGrade(): void {
     console.log(`Assignment ID: ${this.assignmentID}`);

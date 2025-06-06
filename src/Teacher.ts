@@ -52,4 +52,6 @@ export class Teacher extends User {
     public getGrades(): Grade[] {
         return this.grades;
     }
+
+    
 }

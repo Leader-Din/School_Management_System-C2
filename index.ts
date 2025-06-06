@@ -12,87 +12,237 @@ import { Feedback } from "./src/Feedback";
 import { Department } from "./src/Department";
 import { TimeTable } from "./src/TimeTable";
 import { Student } from "./src/Student";
+import { ExamScore } from "./src/ExamScore";
+import { Admin } from "./src/Admin";
+import { SubjectResult } from "./src/SubjectResult";
+import { StudentExamReport } from "./src/StudentExamReport";
 
-// School
-const school = new SchoolManagementSystem("My School", "123 St", "123456789");
+
+/// ****************************************************___AssignmentSchoolManagementSystem___**********************************************************************
+// Create the object
+const school = new SchoolManagementSystem(
+  "Golden Future High School",
+  "123 Education Street, Phnom Penh",
+  "012 345 678"
+);
+
+// View school details
 console.log(school.viewSchoolDetails());
 
-// Department
-const csDept = new Department("Computer Science");
 
-// Teacher
-const teacher = new Teacher(1, "Alice", "Doe", "alice@school.com", "pass123", "0987654321", csDept);
+// *************************************************************___Department___************************************************************************************
+const dept = new Department(["Computer Science"]);
+console.log(dept);
 
-// Subject
-const subject = new Subject(1, "CS101", [teacher]);
-// Grade
-const grade1 = new Grade(1, 1001, 92, "Excellent work!");
-grade1.showGrade();
 
-// Exam + Timetable
-const room = new Room("Room 101"); 
-const exam = new Exam([subject], "CS101", new Date(), room);
-const timetable = new TimeTable(new Date(), "Room 101", "CS101", [exam]);
+// ***************************************************************___Teacher___************************************************************************************
+const teacher = new Teacher(
+  1,                         
+  "Lynak",                    
+  "Khat",                     
+  "lynak@example.com",       
+  "password123",              
+  "098765432",                
+  dept          
+);
 
-// Student
-const assignments = [new Assignment(1, "HW1", "Solve problems 1-5", new Date("2024-06-30"), "CS101")];
-const googleClassroom = new GoogleClassroom();
-// If Student expects string[] for assignments, extract assignment names or IDs:
-const assignmentNames = assignments.map(a => a.title); // or a.id if IDs are expected
-const student = new Student(2, "Pheakdy", "Din", "pheakdy@school.com", "pass123", "0123456789", assignmentNames, timetable, googleClassroom);
+// Add teacher to department
+dept.addTeacher(teacher);
 
-// Classroom
-const classroom = new Classroom("CS101");
-// Add teacher and student to classroom
-classroom.addTeacher(teacher);
-classroom.addStudent(student);
-// Teacher uploads assignment and study material
-teacher.uploadAssignment(classroom, new Assignment(1, "Project", "Build a web app", new Date("2024-07-15"), "CS101"));
-teacher.uploadStudyMaterial(classroom, new StudyMaterial("Lecture Notes", ["Introduction to CS"]));
-// Student submits assignment and downloads study material
-if (assignments[0]) {
-	student.submitAssignment(assignments[0], classroom);
-} else {
-	console.error("No assignment found to submit.");
-}
-student.downloadMaterial(new StudyMaterial("Lecture Notes", ["Introduction to CS"]), classroom);
-// Teacher returns grade for student
-const grade = teacher.returnGrade(classroom, new Grade(1, 2, 100, "Excellent work!")); // Replace "A" with a number, e.g., 1
-// Feedback
-const feedback = new Feedback(1);
-feedback.addCommentToSubject(1, "Great job on the project!");
-feedback.addRatingToSubject(1, "A+");
-// Show feedback
-console.log(`Feedback for Subject ID ${feedback.subjectID}:`);
-console.log(`Comment: ${feedback.comment}`);
-console.log(`Rating: ${feedback.rating}`);
-// Show classroom details
-console.log(`Classroom Name: ${classroom.getName()}`);
-// Show teachers and students in classroom
-console.log("Teachers in Classroom:", classroom.getTeachers().map(t => t.getFullName()));
-console.log("Students in Classroom:", classroom.getStudents().map(s => s.getFullName()));
-// Show assignments and study materials in classroom
-console.log("Assignments in Classroom:", classroom.getAssignments().map(a => a.title));
-console.log("Study Materials in Classroom:", classroom.getStudyMaterials().map(sm => sm.title));
-// Show grades in classroom
-console.log("Grades in Classroom:", classroom.getGrades().map(
-  g => `Student ID: ${g.studentID}, Assignment ID: ${g.assignmentID}, Score: ${g.score}, Feedback: ${g.feedback}`
-));
-// Show teacher details
-console.log(`Teacher: ${teacher.getFullName()}`);
-// Show teacher's study materials
-console.log("Teacher's Study Materials:", teacher.getStudyMaterials().map(sm => sm.title));
-// Show teacher's assignments
-console.log("Teacher's Assignments:", teacher.getAssignments().map(a => a.title));
-// Show teacher's grades
-console.log("Teacher's Grades:", teacher.getGrades().map(
-  g => `Student ID: ${g.studentID}, Assignment ID: ${g.assignmentID}, Grade: ${g.getLetterGrade()}`
-));
-// show it on console
+// test
+console.log("Teacher Created:");
+console.log(`ID: ${teacher.getId?.() ?? teacher["userId"]}`);
+console.log(`Name: ${teacher.getFullName()}`);
+console.log(`Email: ${teacher["email"]}`);
+
+
+// *************************************************************___Assignment___************************************************************************************
+
+const assignment = new Assignment(
+  1,                                 
+  "Build a Portfolio Website",       
+  "Create a personal portfolio website using HTML, CSS, and JS.", 
+  new Date(2025, 6, 15),             
+  "WD101"                           
+);
+
+// test
+console.log(assignment.getDetails());
+
+
+// *************************************************************___Subject___************************************************************************************
+
+const subject = new Subject(
+  101,                 
+  "Web Development",   
+  "WD101",             
+  [teacher]           
+);
+
+// test
+console.log("Subject Created:");
+console.log("Subject Name:", subject.name);
+
+
+// *************************************************************___Student___************************************************************************************
+const student = new Student(
+  1,                    
+  "John",              
+  "Doe",               
+  "john.doe@example.com", 
+  "securePassword123",  
+  "+1234567890"        
+);
+
+// Set timetable and classrooms after creation
+// student.setTimetable(myTimeTable);
+// student.setClassrooms([classroom1, classroom2]);
+
+// test
 console.log(student.viewTimetable());
 console.log(student.viewStudyMaterial());
-console.log(student.getFullName());
-console.log(student.viewExamSchedules());
-console.log(student.viewAssignment());
-student.login("remen@school.com", "pass123");
-student.register("Leader", "Din", "leader@gmail.com", "leader123", "1234567890");
+
+
+// *************************************************************___Admin___************************************************************************************
+
+const admin = new Admin(
+  1001,
+  "AdminFirstName",
+  "AdminLastName",
+  "admin@example.com",
+  "adminPass",
+  "+1987654321"
+);
+
+
+// Assign subject and teacher to admin
+admin.assignSubjectToStudents(subject);
+admin.assignTeacherToStudents(teacher);
+
+console.log(admin.subjects);
+console.log(admin.teachers);
+
+
+// *************************************************************___Room___************************************************************************************
+
+const room1 = new Room(["Room A101"], "Building 1, First Floor");
+const room2 = new Room(["Room B202"], "Building 2, Second Floor");
+
+console.log(room1);
+console.log(room2);
+
+
+// *************************************************************___Exam___************************************************************************************
+
+// Create an Exam object
+const exam1 = new Exam(
+  [subject],             
+  "Midterm Exam",                  
+  new Date("2025-06-15T09:00:00"), // exam date
+  room1                        
+);
+
+console.log(exam1);
+
+
+// ***********************************************************___TimeTable___************************************************************************************
+
+// Create the TimeTable object
+const timetable = new TimeTable(
+  new Date("2025-06-01T08:00:00"),  
+  [room1, room2],                   
+  subject                         
+);
+
+timetable.addExamSchedule(exam1);
+
+console.log(timetable);
+
+
+// *********************************************************___GoogleClassroom___************************************************************************************
+
+// Create a GoogleClassroom instance
+const googleClassroom = new GoogleClassroom();
+
+// Create a new classroom
+googleClassroom.createClassroom("Physics 101");
+
+// Get all classrooms
+const classrooms = googleClassroom.getAllClassrooms();
+
+console.log(classrooms);
+
+// ***********************************************************___Classroom___************************************************************************************
+
+const myClassroom = new Classroom("Math 101");
+
+console.log(myClassroom);
+
+
+// **********************************************************___StudyMaterial___************************************************************************************
+
+const material = new StudyMaterial("Introduction to Web Development", [
+  "HTML Basics",
+  "CSS Styling",
+  "JavaScript Introduction"
+]);
+
+
+// *************************************************************___Grade___************************************************************************************
+const grade = new Grade(
+  101,           
+  2025,         
+  95,           
+  "Excellent work, keep it up!"  
+);
+
+// Display grade details
+grade.showGrade();
+
+
+// *************************************************************___Feedback___************************************************************************************
+// Create a feedback object for a subject with ID 101
+const feedback = new Feedback(101);
+
+// Add a comment to the subject
+feedback.addCommentToSubject(101, "This subject is very interesting and well taught.");
+
+// Add a rating to the subject
+feedback.addRatingToSubject(101, "Excellent");
+
+// Log the current state of the feedback
+console.log("Feedback Details:");
+console.log(`Subject ID: ${feedback.subjectID}`);
+console.log(`Comment: ${feedback.comment}`);
+console.log(`Rating: ${feedback.rating}`);
+
+
+// *************************************************************___ExamScore___************************************************************************************
+// Now create an ExamScore object
+const examScore = new ExamScore(exam1, 88);
+
+
+// ***********************************************************___SubjectResult___************************************************************************************
+// Create SubjectResult object
+const subjectResult = new SubjectResult(subject);
+
+// Add exam scores to subject result
+subjectResult.addExamScore(examScore);
+
+// Show results
+subjectResult.showResult();
+
+
+// ***********************************************************___StudentExamReport___*********************************************************************************
+// Create StudentExamReport and add SubjectResults
+const report = new StudentExamReport(student);
+report.addSubjectResult(subjectResult);
+
+// Show the full report
+report.showFullReport();
+
+
+
+
+
+

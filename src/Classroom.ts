@@ -17,18 +17,6 @@ export class Classroom {
         return this.name;
     }
 
-    public downloadStudyMaterial(studyMaterial: StudyMaterial): StudyMaterial {
-        const found = this.studyMaterials.find(
-        (sm) => sm.title === studyMaterial.title
-        );
-        if (found) {
-        console.log(`Downloading study material "${found.title}" from classroom "${this.name}".`);
-        return found;
-        } else {
-        throw new Error("Study material not found.");
-        }
-    }
-
     public addTeacher(teacher: Teacher): void {
         this.teachers.push(teacher);
     }
@@ -56,4 +44,17 @@ export class Classroom {
     public getGrades(): Grade[] {
         return this.grades;
     }
+
+    public downloadStudyMaterial(studyMaterial: StudyMaterial): StudyMaterial {
+        const found = this.studyMaterials.find(
+            (sm) => sm.title === studyMaterial.title
+        );
+        if (found) {
+            console.log(`Downloading study material "${found.title}" from classroom "${this.name}".`);
+            return found;
+        } else {
+            throw new Error("Study material not found.");
+        }
+    }
+
 }
