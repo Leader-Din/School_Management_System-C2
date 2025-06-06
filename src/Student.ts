@@ -20,7 +20,6 @@ export class Student extends User {
         super(userId, firstName, lastName, email, password, phone);
     }
 
-    // Optionally add setters for timetable and classrooms
     public setTimetable(timetable: TimeTable): void {
         this.timetable = timetable;
     }

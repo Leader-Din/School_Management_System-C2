@@ -13,7 +13,6 @@ export class Assignment {
         this.subjectCode = subjectCode;
     }
 
-    // Optional: method to show assignment details
     getDetails(): string {
         return `Assignment: ${this.title} (${this.subjectCode}) - Due on ${this.dueDate.toDateString()}`;
     }

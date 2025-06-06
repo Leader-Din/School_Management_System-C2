@@ -18,8 +18,7 @@ export class Grade {
     if (this.score >= 60) return 'D';
     return 'F';
   }
-  
-  // Optional: method to display the grade details
+
   showGrade(): void {
     console.log(`Assignment ID: ${this.assignmentID}`);
     console.log(`Student ID: ${this.studentID}`);

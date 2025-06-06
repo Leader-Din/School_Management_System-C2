@@ -18,7 +18,6 @@ export class TimeTable {
         this.examSchedules.push(examSchedule);
     }
 
-    // Optional getters
     public getTime(): Date {
         return this.time;
     }

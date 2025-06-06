@@ -18,7 +18,7 @@ import { SubjectResult } from "./src/SubjectResult";
 import { StudentExamReport } from "./src/StudentExamReport";
 
 
-/// ****************************************************___AssignmentSchoolManagementSystem___**********************************************************************
+/// ****************************************************___SchoolManagementSystem___**********************************************************************
 // Create the object
 const school = new SchoolManagementSystem(
   "Golden Future High School",
@@ -29,14 +29,9 @@ const school = new SchoolManagementSystem(
 // View school details
 console.log(school.viewSchoolDetails());
 
-
 // *************************************************************___Department___************************************************************************************
 const dept = new Department(["Computer Science"]);
-console.log(dept);
-
-
-// ***************************************************************___Teacher___************************************************************************************
-const teacher = new Teacher(
+const teacher2 = new Teacher(
   1,                         
   "Lynak",                    
   "Khat",                     
@@ -46,14 +41,94 @@ const teacher = new Teacher(
   dept          
 );
 
-// Add teacher to department
-dept.addTeacher(teacher);
+// Add teachers to department
+dept.addTeacher(teacher2);
 
-// test
-console.log("Teacher Created:");
-console.log(`ID: ${teacher.getId?.() ?? teacher["userId"]}`);
-console.log(`Name: ${teacher.getFullName()}`);
-console.log(`Email: ${teacher["email"]}`);
+
+// ***************************************************************___Teacher___************************************************************************************
+const teacher1 = new Teacher(
+  1,                         
+  "Lynak",                    
+  "Khat",                     
+  "lynak@example.com",        
+  "password123",              
+  "098765432",                
+  dept          
+);
+
+const classroom1 = new Classroom("Math 101");
+
+const assignment1 = new Assignment(
+  1,                                 
+  "Build a Portfolio Website",       
+  "Create a personal portfolio website using HTML, CSS, and JS.", 
+  new Date(2025, 6, 15),             
+  "WD101"                            
+);
+
+const material1 = new StudyMaterial("Introduction to Web Development", [
+  "HTML Basics",
+  "CSS Styling",
+  "JavaScript Introduction"
+]);
+
+const grade1 = new Grade(
+  101,           
+  2025,         
+  95,           
+  "Excellent work, keep it up!"  
+);
+
+// Test uploadAssignment()
+teacher1.uploadAssignment(classroom1, assignment1);
+
+// Test uploadStudyMaterial()
+teacher1.uploadStudyMaterial(classroom1, material1);
+
+// Test returnGrade()
+teacher1.returnGrade(classroom1, grade1);
+
+console.log("\n=== Verifying Data in Classroom ===");
+
+// Assignments
+const assignments = classroom1.getAssignments()!; 
+if (assignments.length === 0) {
+    console.log("No assignments found in classroom.");
+} else {
+    console.log("Assignments in Classroom:");
+    assignments.forEach(assignment => {
+        console.log(`- ${assignment.title}`);
+    });
+}
+
+// Study Materials
+const studyMaterials = classroom1.getStudyMaterials()!; 
+if (studyMaterials.length === 0) {
+    console.log("No study materials found in classroom.");
+} else {
+    console.log("\nStudy Materials in Classroom:");
+    studyMaterials.forEach(material => {
+        console.log(`- ${material.title}`);
+    });
+}
+
+// Grades
+const grades = classroom1.getGrades()!;
+if (grades.length === 0) {
+    console.log("No grades found in classroom.");
+} else {
+    console.log("\nGrades in Classroom:");
+    grades.forEach(g => {
+        console.log(`- Student ID: ${g.studentID}, Assignment ID: ${g.assignmentID}, Score: ${g.score}`);
+    });
+}
+
+// Test Teacher Info
+console.log("\nTeacher Created:");
+console.log(`ID: ${teacher1.getId?.() ?? teacher1["userId"]}`);
+console.log(`Name: ${teacher1.getFullName()}`);
+console.log(`Email: ${teacher1["email"]}`);
+
 
 
 // *************************************************************___Assignment___************************************************************************************
@@ -76,7 +151,7 @@ const subject = new Subject(
   101,                 
   "Web Development",   
   "WD101",             
-  [teacher]           
+  [teacher1]           
 );
 
 // test
@@ -85,22 +160,65 @@ console.log("Subject Name:", subject.name);
 
 
 // *************************************************************___Student___************************************************************************************
+// Create a Classroom instance
+const classroom = new Classroom("Math 101");
+
+// Create a Teacher and add them to the classroom
+const teacher3 = new Teacher(1, "Alice", "Smith", "alice@example.com", "password", "+1234567890", dept);
+classroom.addTeacher(teacher1);
+
+// Create a Student instance
 const student = new Student(
-  1,                    
-  "John",              
-  "Doe",               
-  "john.doe@example.com", 
-  "securePassword123",  
-  "+1234567890"        
+    1,                    
+    "John",              
+    "Doe",               
+    "john.doe@example.com", 
+    "securePassword123",  
+    "+1234567890"        
 );
 
-// Set timetable and classrooms after creation
-// student.setTimetable(myTimeTable);
-// student.setClassrooms([classroom1, classroom2]);
+// Add the student to the classroom
+classroom.addStudent(student);
 
-// test
-console.log(student.viewTimetable());
-console.log(student.viewStudyMaterial());
+// Create and upload Study Materials and Assignments
+const material2 = new StudyMaterial("Introduction to Algebra", ["Algebra Basics", "Equations"]);
+const assignment2 = new Assignment(1, "Algebra Homework", "Complete the exercises in Chapter 1", new Date(2025, 6, 15), "WD101");
+
+classroom.getStudyMaterials().push(material1); 
+classroom.getAssignments().push(assignment1); 
+
+// Test viewing timetable 
+console.log("Timetable for student:", student.viewTimetable());
+
+// Test viewing study materials
+console.log("Study Materials:");
+const studyMaterial2 = classroom.getStudyMaterials();
+if (studyMaterials.length === 0) {
+    console.log("No study materials available.");
+} else {
+    studyMaterials.forEach((material) => {
+        console.log(`- ${material.title}`);
+    });
+}
+
+// viewing assignments
+console.log("Assignments:");
+const assignment3 = classroom.getAssignments();
+if (assignments.length === 0) {
+    console.log("No assignments available.");
+} else {
+    assignments.forEach((assignment) => {
+        console.log(`- ${assignment.title}`);
+    });
+}
+
+// downloading study material
+try {
+    const downloadedMaterial = classroom.downloadStudyMaterial(material1);
+    console.log(`Downloaded: ${downloadedMaterial.title}`);
+} catch (error: any) { 
+    console.error("Error:", error.message); 
+}
 
 
 // *************************************************************___Admin___************************************************************************************
@@ -117,7 +235,7 @@ const admin = new Admin(
 
 // Assign subject and teacher to admin
 admin.assignSubjectToStudents(subject);
-admin.assignTeacherToStudents(teacher);
+admin.assignTeacherToStudents(teacher1);
 
 console.log(admin.subjects);
 console.log(admin.teachers);
@@ -218,7 +336,7 @@ console.log(`Rating: ${feedback.rating}`);
 
 
 // *************************************************************___ExamScore___************************************************************************************
-// Now create an ExamScore object
+// ExamScore object
 const examScore = new ExamScore(exam1, 88);
 
 

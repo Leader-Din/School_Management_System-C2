@@ -22,7 +22,7 @@ export class StudentExamReport {
     let total = 0;
     for (let i = 0; i < this.results.length; i++) {
       const result = this.results[i];
-      if (result) { // Check if result is defined
+      if (result) { 
         total += result.getAverageScore();
       }
     }
@@ -44,7 +44,7 @@ export class StudentExamReport {
     } else {
       for (let i = 0; i < this.results.length; i++) {
         const result = this.results[i];
-        if (result) { // Check if result is defined
+        if (result) { 
           result.showResult();
           console.log("---------------------------");
         }

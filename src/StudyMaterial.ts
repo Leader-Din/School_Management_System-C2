@@ -12,7 +12,6 @@ export class StudyMaterial {
     this.content = content;
   }
 
-  // Optional: method to display content
   showMaterial(): void {
     console.log(`Title: ${this.title}`);
     console.log("Content:");

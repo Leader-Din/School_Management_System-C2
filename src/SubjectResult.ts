@@ -18,7 +18,7 @@ export class SubjectResult {
     let total = 0;
     for (let i = 0; i < this.scores.length; i++) {
       const score = this.scores[i];
-      if (score) { // Check if score is defined
+      if (score) {
         total += score.score;
       }
     }
@@ -46,7 +46,7 @@ export class SubjectResult {
     console.log("Scores:");
     for (let i = 0; i < this.scores.length; i++) {
       const score = this.scores[i];
-      if (score) { // Check if score is defined
+      if (score) { 
         const exam = score.exam;
         console.log(`  - ${exam.title}: ${score.score}`);
       }

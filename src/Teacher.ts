@@ -23,20 +23,20 @@ export class Teacher extends User {
     }
 
     public uploadAssignment(classroom: Classroom, assignment: Assignment): void {
-        this.assignments.push(assignment); // Add to teacher's list
-        classroom.getAssignments().push(assignment); // Add to classroom's list
+        this.assignments.push(assignment); 
+        classroom.getAssignments().push(assignment); 
         console.log(`Assignment "${assignment.title}" uploaded by ${this.getFullName()} to classroom "${classroom.getName()}".`);
     }
 
     public uploadStudyMaterial(classroom: Classroom, material: StudyMaterial): void {
-        this.studyMaterials.push(material); // Add to teacher's list
-        classroom.getStudyMaterials().push(material); // Add to classroom's list
+        this.studyMaterials.push(material); 
+        classroom.getStudyMaterials().push(material); 
         console.log(`Study material "${material.title}" uploaded by ${this.getFullName()} to classroom "${classroom.getName()}".`);
     }
 
     public returnGrade(classroom: Classroom, grade: Grade): Grade {
-        this.grades.push(grade); // Add to teacher's list
-        classroom.getGrades().push(grade); // Add to classroom's list
+        this.grades.push(grade); 
+        classroom.getGrades().push(grade); 
         console.log(`Grade returned by ${this.getFullName()} for student ${grade.studentID} on assignment ${grade.assignmentID}.`);
         return grade;
     }
