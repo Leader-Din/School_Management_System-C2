@@ -1,6 +1,6 @@
 // Subject.ts
-import { Teacher } from "./Teacher";
 
+import { Teacher } from "./Teacher";
 export class Subject {
   constructor(
     private subjectID: number,
@@ -12,6 +12,12 @@ export class Subject {
     this.subjectID = subjectID;
     this.codeSubject = codeSubject;
     this.teachers = teachers;
+  }
+
+  public addSubject(subjectID: number, codeSubject: string, teacher: Teacher): void {
+    this.subjectID = subjectID;
+    this.codeSubject = codeSubject;
+    this.teachers.push(teacher);
   }
 
   public getSubjectID(): number {
@@ -26,4 +32,3 @@ export class Subject {
     return [...this.teachers];
   }
 }
-

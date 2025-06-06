@@ -1,10 +1,11 @@
 // Teacher.ts
+
+import { User } from "./User";
 import { Classroom } from "./Classroom";
 import { StudyMaterial } from "./StudyMaterial";
 import { Assignment } from "./Assignment";
 import { Grade } from "./Grade";
 import { Department } from "./Department";
-import { User } from "./User";
 
 export class Teacher extends User {
   private studyMaterials: StudyMaterial[] = [];
@@ -42,6 +43,10 @@ export class Teacher extends User {
     return grade;
   }
 
+  public viewSubmissions(classroom: Classroom): Assignment[] {
+    return classroom.getAssignments();
+  }
+
   public getAssignments(): Assignment[] {
     return [...this.assignments];
   }
@@ -52,5 +57,9 @@ export class Teacher extends User {
 
   public getGrades(): Grade[] {
     return [...this.grades];
+  }
+
+  public getDepartment(): Department {
+    return this.department;
   }
 }

@@ -1,7 +1,9 @@
 // Admin.ts
+
 import { User } from "./User";
 import { Subject } from "./Subject";
 import { Teacher } from "./Teacher";
+import { Student } from "./Student";
 
 export class Admin extends User {
   private subjects: Subject[] = [];
@@ -28,11 +30,41 @@ export class Admin extends User {
     console.log(`Teacher ${teacher.getFullName()} added by ${this.getFullName()}.`);
   }
 
-  getSubjects(): Subject[] {
-    return [...this.subjects];
+  assignSubjectToStudents(subject: Subject, student: Student): void {
+    console.log(`Subject ${subject.getCodeSubject()} assigned to ${student.getFullName()} by ${this.getFullName()}.`);
   }
 
-  getTeachers(): Teacher[] {
+  assignTeacherToStudents(teacher: Teacher, student: Student): void {
+    console.log(`Teacher ${teacher.getFullName()} assigned to ${student.getFullName()} by ${this.getFullName()}.`);
+  }
+
+  addStudentReport(studentExamReport: StudentExamReport): void {
+    studentExamReport.showFullReport();
+  }
+
+  viewAllTeachers(): Teacher[] {
     return [...this.teachers];
+  }
+
+  viewAllSubjects(): Subject[] {
+    return [...this.subjects];
+  }
+}
+
+// SchoolManagementSystem.ts
+export class SchoolManagementSystem {
+  constructor(
+    private name: string,
+    private address: string,
+    private contact: string,
+    private schoolID: string
+  ) {}
+
+  public viewSchoolDetails(): string {
+    return `School Name: ${this.name}, Address: ${this.address}, Contact: ${this.contact}, School ID: ${this.schoolID}`;
+  }
+
+  public viewSchoolID(): string {
+    return this.schoolID;
   }
 }

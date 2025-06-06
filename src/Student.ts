@@ -1,8 +1,9 @@
 // Student.ts
-import { GoogleClassroom } from "./GoogleClassroom";
-import { TimeTable } from "./TimeTable";
+
 import { User } from "./User";
 import { Assignment } from "./Assignment";
+import { TimeTable } from "./TimeTable";
+import { GoogleClassroom } from "./GoogleClassroom";
 import { Classroom } from "./Classroom";
 import { StudyMaterial } from "./StudyMaterial";
 import { Exam } from "./Exam";
@@ -61,5 +62,9 @@ export class Student extends User {
     } catch (error) {
       console.log(`${this.getFullName()} failed to download: ${error}`);
     }
+  }
+
+  public getSubmittedAssignments(): Assignment[] {
+    return [...this.submittedAssignments];
   }
 }

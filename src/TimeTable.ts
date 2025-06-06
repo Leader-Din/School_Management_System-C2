@@ -1,6 +1,6 @@
 // TimeTable.ts
-import { Exam } from "./Exam";
 
+import { Exam } from "./Exam";
 export class TimeTable {
   constructor(
     private time: Date,
@@ -16,5 +16,16 @@ export class TimeTable {
   public getExamSchedules(): Exam[] {
     return [...this.examSchedules];
   }
-}
 
+  public getTime(): Date {
+    return this.time;
+  }
+
+  public getRoom(): string {
+    return this.room;
+  }
+
+  public getSubject(): string {
+    return this.subject;
+  }
+}

@@ -7,6 +7,14 @@ export class Grade {
     public feedback: string
   ) {}
 
+  public getLetterGrade(): string {
+    if (this.score >= 90) return "A";
+    if (this.score >= 80) return "B";
+    if (this.score >= 70) return "C";
+    if (this.score >= 60) return "D";
+    return "F";
+  }
+
   showGrade(): void {
     console.log(`Assignment ID: ${this.assignmentID}`);
     console.log(`Student ID: ${this.studentID}`);

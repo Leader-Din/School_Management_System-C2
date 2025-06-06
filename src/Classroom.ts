@@ -1,9 +1,9 @@
 // Classroom.ts
+import { StudyMaterial } from "./StudyMaterial";
 import { Assignment } from "./Assignment";
 import { Grade } from "./Grade";
-import { Student } from "./Student";
-import { StudyMaterial } from "./StudyMaterial";
 import { Teacher } from "./Teacher";
+import { Student } from "./Student";
 
 export class Classroom {
   private studyMaterials: StudyMaterial[] = [];
@@ -24,7 +24,7 @@ export class Classroom {
       console.log(`Downloading study material "${found.title}" from classroom "${this.name}".`);
       return found;
     } else {
-      throw new Error("Study material not found.");
+      throw "Study material not found.";
     }
   }
 

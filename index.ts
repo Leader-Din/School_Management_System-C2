@@ -13,74 +13,52 @@ import { Department } from "./src/Department";
 import { TimeTable } from "./src/TimeTable";
 import { Student } from "./src/Student";
 import { Admin } from "./src/Admin";
-// School
-const school = new SchoolManagementSystem("My School", "123 St", "123456789");
-console.log(school.viewSchoolDetails());
 
-// Department
-const csDept = new Department("Computer Science");
 
-// Teacher
-const teacher = new Teacher(1, "Alice", "Doe", "alice@school.com", "pass123", "0987654321", csDept);
-csDept.addTeacher(teacher);
-
-// Subject
-const subject = new Subject(1, "CS101", [teacher]);
-// Grade
-const grade1 = new Grade(1, 1001, 92, "Excellent work!");
-grade1.showGrade();
-
-// Admin
-const admin = new Admin(3, "John", "Smith", "john@school.com", "admin123", "1112223333");
-admin.addSubject(subject);
-admin.addTeacher(teacher);
-
-// Exam + Timetable
-const room = new Room("CS101", "First Floor");
-const exam = new Exam([subject], "CS101 Midterm", new Date("2025-06-10"), room);
-const timetable = new TimeTable(new Date("2025-06-10"), "Room 101", "CS101", [exam]);
-
-// GoogleClassroom and Classroom
+// Example Usage
+const school = new SchoolManagementSystem("Springfield High", "123 Main St", "contact@springfieldhigh.com", "SCH001");
+const mathDept = new Department("Mathematics");
+const teacher = new Teacher(1, "John", "Doe", "john.doe@example.com", "password", "1234567890", mathDept);
+const timetable = new TimeTable(new Date("2025-06-04T10:00:00"), "Room 101", "Math", []);
 const googleClassroom = new GoogleClassroom();
-const classroom = googleClassroom.createClassroom("CS101 Classroom");
+const student = new Student(2, "Jane", "Smith", "jane.smith@example.com", "password", "0987654321", timetable, googleClassroom);
+const admin = new Admin(3, "Admin", "User", "admin@example.com", "password", "5555555555");
+const classroom = new Classroom("Math 101");
+const subject = new Subject(1, "MATH101", [teacher]);
+const room = new Room("Room 101", "Building A");
+const exam = new Exam([subject], "Midterm", new Date("2025-06-04T10:00:00"), room);
+const studyMaterial = new StudyMaterial("Lesson 1", ["Content 1", "Content 2"]);
+const assignment = new Assignment(1, "Homework 1", "Complete exercises", new Date("2025-06-05"), "MATH101");
+const grade = new Grade(1, 2, 85, "Good effort");
+const examScore = new ExamScore(exam, 90);
+const subjectResult = new SubjectResult(subject);
+const studentExamReport = new StudentExamReport(student);
+const feedback = new Feedback(1);
+const notification = new Notification();
+
+timetable.addExamSchedule(exam);
 classroom.addTeacher(teacher);
-
-// Student
-const assignment = new Assignment(1, "HW1", "Solve problems 1-5", new Date("2025-06-30"), "CS101");
-const student = new Student(
-  2,
-  "Pheakdy",
-  "Din",
-  "pheakdy@school.com",
-  "pass123",
-  "0123456789",
-  timetable,
-  googleClassroom
-);
-
-// Add assignment and study material
-teacher.uploadAssignment(classroom, assignment);
-const studyMaterial = new StudyMaterial("CS101 Notes", ["Chapter 1: Intro", "Chapter 2: Variables"]);
+classroom.addStudent(student);
+classroom.addStudyMaterial(studyMaterial);
+classroom.addAssignment(assignment);
+classroom.addGrade(grade);
 teacher.uploadStudyMaterial(classroom, studyMaterial);
-
-// Student interactions
-console.log(student.viewTimetable());
-console.log(student.viewExamSchedules());
-console.log(student.viewAssignments(classroom));
-console.log(student.viewStudyMaterials(classroom));
+teacher.uploadAssignment(classroom, assignment);
+teacher.returnGrade(classroom, grade);
 student.submitAssignment(assignment, classroom);
 student.downloadMaterial(studyMaterial, classroom);
+admin.addSubject(subject);
+admin.addTeacher(teacher);
+admin.assignSubjectToStudents(subject, student);
+admin.assignTeacherToStudents(teacher, student);
+subjectResult.addExamScore(examScore);
+studentExamReport.addSubjectResult(subjectResult);
+admin.addStudentReport(studentExamReport);
+feedback.addCommentToSubject(1, "Great subject!");
+feedback.addRatingToSubject(1, "5/5");
+notification.alertMessageBeforeClass5Minute(timetable);
 
-// Grade
-const grade = new Grade(assignment.id, student.getUserId(), 85, "Good work!");
-teacher.returnGrade(classroom, grade);
-console.log(student.viewAssignmentGrades(classroom));
-
-// Feedback
-const feedback = new Feedback(subject.getSubjectID());
-feedback.addComment("Great course!");
-feedback.addRating("5/5");
-
-// Login and Register
-student.login("pheakdy@school.com", "pass123");
-student.register("Leader", "Din", "leader@school.com", "leader123", "1234567890");
+console.log(teacher.login("john.doe@example.com", "password"));
+console.log(student.viewTimetable().getSubject());
+console.log(school.viewSchoolDetails());
+console.log(`Grade: ${grade.getLetterGrade()}`);

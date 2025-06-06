@@ -1,6 +1,6 @@
 // Department.ts
-import { Teacher } from "./Teacher";
 
+import { Teacher } from "./Teacher";
 export class Department {
   private teachers: Teacher[] = [];
 

@@ -1,6 +1,6 @@
 // GoogleClassroom.ts
-import { Classroom } from "./Classroom";
 
+import { Classroom } from "./Classroom";
 export class GoogleClassroom {
   private classrooms: Classroom[] = [];
 
